@@ -1,0 +1,218 @@
+:root {
+    --primary-color: #f4f4f4;
+    --secondary-color: #65A3CB;
+    --accent-color: #EBB248;
+    --error-color: #E67147;
+}
+
+/* navbar */
+
+#top {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    background: Var(--primary-color);
+    z-index: 10000;
+    box-shadow: 0 0 1px 0 rgb(16 16 32 / 25%), 0 0 2px 0 rgb(0 0 0 / 15%);
+    height: 3.75em;
+    -moz-transition: top 0.25s ease-in-out;
+    -webkit-transition: top 0.25s ease-in-out;
+    -ms-transition: top 0.25s ease-in-out;
+    transition: top 0.25s ease-in-out;
+    font-size: 0.9em;
+    z-index: 10000;
+    cursor: default;
+}
+
+#top .right {
+    position: absolute;
+    top: 0.5em;
+    right: 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+
+#top .left {
+    position: absolute;
+    top: 0.5em;
+    left: 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+#top h1 {
+    font-size: 1.75em;
+    margin-top: .25em;
+    color: Var(--secondary-color);
+}
+
+.fa-square {
+    color: var(--secondary-color);
+
+}
+
+.hamburger {
+    display: none
+}
+
+@media screen and (max-width: 1024px) {
+    .hamburger {
+    display: inline-block;
+    font-size: 1.7em;
+    }
+}
+
+/* header */
+
+#header {
+    top: 3em;
+    background-color: var(--secondary-color);
+}
+
+#header > nav ul li a.active {
+    background: Var(--primary-color);
+    color: Var(--secondary-color) !important;
+}
+
+#header > nav ul li {
+    border-top-color: Var(--secondary-color);
+}
+
+#header > header {
+    padding-bottom: 1em;
+}
+
+#header a {
+    color: Var(--primary-color);
+}
+
+#header > header .avatar {
+    margin-top: 20px;
+}
+
+header.major h2 {
+    color: Var(--secondary-color);
+}
+
+.inner > p {
+    margin-bottom: 1.25em;
+}
+
+/* skills */
+
+.icons {
+    margin-top: 10px;
+}
+
+ul.feature-icons li:before {
+    background-color: Var(--secondary-color);
+}
+
+/* software projects */
+
+.code-preview {
+    font-family: "Source Code Pro", monospace;
+    color: var(--accent-color);
+    margin: .5em 0 .5em .5em;
+}
+
+.hidden {
+    display: none;
+}
+
+/* employment history */
+
+/* Credit to https://bootstrapmade.com/demo/Kelly/ for progress line  */
+.resume-item::before {
+    content: "";
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    border-radius: 50px;
+    left: -9px;
+    top: .75em;
+    background: #fff;
+    border: 2px solid var(--secondary-color);
+}
+
+.resume-item {
+    padding: 0 0 0 20px;
+    margin-top: -2px;
+    position: relative;
+}
+  
+.collapsible {
+    margin-top: .5em;
+    margin-bottom: 1em;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+}
+
+.collapsible h4 {
+    display: inline-block;
+    margin: .25em;
+}
+  
+.fa-chevron-down {
+    color: var(--secondary-color);
+    opacity: .8;
+}
+
+.active > .row > .col-1 > .fa-chevron-down {
+    -webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	transform: rotate(180deg);
+}
+
+.job-wrapper {
+    padding-left: 1.5em;
+}
+
+.job-date {
+    float: right;
+    margin-top: 3px;
+}
+
+.workplace {
+    color: var(--secondary-color);
+    font-style: italic;
+    opacity: .8;
+}
+
+.border-left {
+    border-left: 2px solid var(--secondary-color);
+    position: absolute;
+    top: 2em;
+    left: -2px;
+    bottom: 0;
+}
+
+@media screen and (max-width: 480px) {
+    .col-1 {
+        padding: 0;
+    }
+
+    .job-date {
+        float: left;
+        margin: 0 0 0 5px;
+    }
+}
+
+/* contact form */
+
+input[type="submit"].primary, input[type="submit"].primary:hover, .button.primary, .button.primary:hover {
+    background-color: Var(--accent-color);
+}
+
+.errors > li::marker {
+    content: '';
+}
+
+.errors > li {
+    color: var(--error-color);
+    font-style: italic;
+}
+
+
