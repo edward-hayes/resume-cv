@@ -17,7 +17,6 @@ app = Flask(__name__)
 app.secret_key = os.getenv("SECRET_KEY")
 
 mail = Mail()
-TO_ADDRESS = "hayesejh@gmail.com"
 
 class MyForm(FlaskForm):
     name = StringField(validators=[DataRequired()])
