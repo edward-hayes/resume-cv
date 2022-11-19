@@ -5,12 +5,16 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length
 from datetime import date
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
 
 now = date.today()
 year = now.year
 
 app = Flask(__name__)
-app.secret_key = "yXEThxdFPfPWHtRwkWhy"
+app.secret_key = os.getenv("SECRET_KEY")
 
 mail = Mail()
 TO_ADDRESS = "hayesejh@gmail.com"
@@ -31,7 +35,11 @@ def home():
             email = form.email.data
             subject = form.subject.data
             message = form.message.data
-            print(f"form validated \nname: {name}\nemail: {email}\nsubject: {subject}\nmessage:{message}\n")
+            mail.send_msg(
+            to_address=os.getenv("TO_ADDRESS"),
+            subject=f"WEBSITE: {name} sent you a message",
+            message=f"Name: {name}\nEmail: {email}\n\nSubject:{subject}\n{message}"
+            )
             return redirect(url_for('thanks',name=name))
         else:
             return render_template("index.html",form=form,error=True, year=year)
