@@ -1,0 +1,35 @@
+				<!-- Footer -->
+					<section id="footer">
+						<div class="container">
+							<ul class="copyright">
+								<li>&copy; Edward Hayes {{year}}</li>
+								<li>Design: <a href="https://html5up.net/read-only">HTML5 UP</a></li>
+								<li>Cover Photo: <a href="https://unsplash.com/@asoggetti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></li>
+							</ul>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="static/assets/js/jquery.min.js"></script>
+			<script src="static/assets/js/jquery.scrollex.min.js"></script>
+			<script src="static/assets/js/jquery.scrolly.min.js"></script>
+			<script src="static/assets/js/browser.min.js"></script>
+			<script src="static/assets/js/breakpoints.min.js"></script>
+			<script src="static/assets/js/util.js"></script>
+			<script src="static/assets/js/main.js"></script>
+			<script src="static/assets/js/custom.js"></script>
+			<script>   
+				{% if error==True%}
+					scrollTo("five");
+				{%endif%};
+   				
+				function scrollTo(hash) {
+    			location.hash = "#" + hash;
+				}
+
+			</script>
+
+	</body>
+</html>

@@ -4,6 +4,10 @@ from mailer import Email as Mail
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Email, Length
+from datetime import date
+
+now = date.today()
+year = now.year
 
 app = Flask(__name__)
 app.secret_key = "yXEThxdFPfPWHtRwkWhy"
@@ -28,12 +32,16 @@ def home():
             subject = form.subject.data
             message = form.message.data
             print(f"form validated \nname: {name}\nemail: {email}\nsubject: {subject}\nmessage:{message}\n")
-            return redirect(url_for('home'))
+            return redirect(url_for('thanks',name=name))
         else:
-            return render_template("index.html",form=form,error=True)
+            return render_template("index.html",form=form,error=True, year=year)
     else:
-        return render_template("index.html",form=form)
+        return render_template("index.html",form=form, year=year)
 
+@app.route('/thanks')
+def thanks():
+    name = request.args.get('name')
+    return render_template('success.html',name=name, year=year)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
