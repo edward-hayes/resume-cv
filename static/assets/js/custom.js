@@ -15,3 +15,14 @@ for (i = 0; i < coll.length; i++) {
     }
   });
 }
+
+$(function(){
+  $('img.image').each(function(e){
+    var src = $(this).attr('src');
+    $(this).hover(function(){
+      $(this).attr('src', src.replace('.png', '.gif'));
+    }, function(){
+      $(this).attr('src', src);
+    });
+  });
+});

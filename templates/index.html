@@ -1,61 +1,4 @@
-<!DOCTYPE HTML>
-<!--
-	Read Only by HTML5 UP
-	html5up.net | @ajlkn
-	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
--->
-<html>
-	<head>
-		<title>Edward Hayes | Junior Software Developer | hayesejh@gmail.com </title>
-		<link rel="icon" href="static/images/circled-e.png">
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<script src="https://kit.fontawesome.com/208ede1d28.js" crossorigin="anonymous"></script>
-		<link rel="stylesheet" href="static/assets/css/main.css" />
-		<link rel="stylesheet" href="static/assets/css/custom.css" />
-	</head>
-	<body class="is-preload">
-
-		<nav id="top">
-		<div class="left">
-			<h1>Edward Hayes</h1>
-		</div>
-		<div class="right" id="menu-right">
-			<a href="static/assets/files/edward_hayes_resume.pdf" class="button primary">Download Resume</a download>
-			<a href="#header" class="toggle">
-				<span class="fa-solid fa-stack hamburger">
-					<i class="fa-solid fas fa-square fa-stack-2x"></i>
-					<i class="fa-solid far fa-bars fa-stack-1x fa-inverse"></i>
-				</span>
-			</a>
-		</div>
-		</nav>
-		<!-- Header -->
-			<section id="header">
-
-				
-				<header>
-					<span class="image avatar"><img src="static/images/edward_hayes.png" alt="" /></span>
-					<h1 id="logo"><a href="#">Edward Hayes</a></h1>
-					<ul class="icons">
-						<li><a href="https://github.com/edward-hayes" class="icon brands fa-github"> GitHub</a></li>
-						<li><a href="https://www.linkedin.com/in/edward-james-hayes" class="icon brands fa-linkedin"> LinkedIn</a></li>
-						<li><a href="mailto:hayesejh@gmail.com" class="icon solid fa-envelope"> Email</a></li>
-					</ul>
-				</header>
-				<nav id="nav">
-					<ul>
-						<li><a href="#one" class="active">About</a></li>
-						<li><a href="#two">Skills</a></li>
-						<li><a href="#three">Software Projects</a></li>
-						<li><a href="#four">Employment History</a></li>
-						<li><a href="#five">Contact</a></li>
-					</ul>
-				</nav>
-			</section>
-
-		<!-- Wrapper -->
-			<div id="wrapper">
+{% include 'header.html' %}
 
 				<!-- Main -->
 					<div id="main">
@@ -98,7 +41,7 @@
 									<h3>Software Projects</h3>
 									<div class="features">
 										<article>
-											<a href="https://github.com/edward-hayes/clock-retro-futuristic" class="image"><img src="static/images/clock-80s.png" alt="" /></a>
+											<a href="https://github.com/edward-hayes/clock-retro-futuristic" class="image"><img src="static/images/clock-80s.png" alt="clock-retro-futuristic" /></a>
 											<div class="inner">
 												<h4>FitBit Versa 80s Clock App</h4>
 												<p><em>Javascript, SVG/ CSS</em></p>
@@ -106,7 +49,7 @@
 											</div>
 										</article>
 										<article>
-											<a href="https://github.com/edward-hayes/clock-harley-davidson" class="image"><img src="static/images/clock-hr.png" alt="" /></a>
+											<a href="https://github.com/edward-hayes/clock-harley-davidson" class="image"><img src="static/images/clock-hr.png" alt="clock-harley-davidson" /></a>
 											<div class="inner">
 												<h4>FitBit Versa Harley Davidson Clock App</h4>
 												<p><em>Javascript, SVG/ CSS</em></p>
@@ -114,7 +57,7 @@
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="static/images/pic03.jpg" alt="" /></a>
+											<img class="image" src="static/images/quickbooks_push.png" alt="quickbooks-push" />
 											<div class="inner">
 												<h4>QuickBooks Push Shift Tool</h4>
 												<p><em>Python, Selenium</em></p>
@@ -122,15 +65,15 @@
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="static/images/pic03.jpg" alt="" /></a>
+											<img class="image" src="static/images/dedupe_customers.png" alt="dedupe-customers" />
 											<div class="inner">
 												<h4>Merge Duplicate Customers in Bulk</h4>
-												<p><em>Python, Selenium</em></p>
+												<p><em>Python, Selenium, Tkinter</em></p>
 												<p>Extends an existing register feature for merging customer records. Unlocks Support's ability to assist retailers with large number of customer records</p>
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="static/images/pic03.jpg" alt="" /></a>
+											<img class="image" src="static/images/link_jira.png" alt="link-jira" />
 											<div class="inner">
 												<h4>ZenDesk <> Jira Integration Bulk Link Tool</h4>
 												<p><em>Python, Selenium</em></p>
@@ -138,7 +81,7 @@
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="static/images/pic03.jpg" alt="" /></a>
+											<a href="https://github.com/vend/vend-cli" class="image"><img src="static/images/vendcli.png" alt="vendcli" /></a>
 											<div class="inner">
 												<h4>VendCli</h4>
 												<p><em>Golang</em></p>
@@ -146,14 +89,23 @@
 											</div>
 										</article>
 										<article>
-											<a href="#" class="image"><img src="static/images/pic03.jpg" alt="" /></a>
+											<img class="image" src="static/images/retry_decorator.png" alt="retry-decorator" />
 											<div class="inner">
 												<h4>Selenium Starter Code</h4>
 												<p><em>Python, Selenium</em></p>
 												<p>Starter code for Python Selenium projects for a quicker start. Features ChromeDriverManager to solve Chrome version discrepancies, retry decorator to solve contingencies, and with statement to clean up browser after code completion (very useful during testing) </p>
 
 											</div>
-											<div class="collapsible"><h4 class="code-preview">Code</h4></div>
+											<div class="collapsible">
+												<div class="row">
+													<div class="col-11">
+														<h4 class="code-preview">Code</h4>
+													</div>
+													<div class="col-1">
+														<i class="fa-solid fa-chevron-down"></i>
+													</div>
+												</div>
+											</div>
 											<pre class="hidden"><code>from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.chrome.service import Service
@@ -408,39 +360,4 @@ with Driver() as driver:
 							</section>
 
 					</div>
-
-				<!-- Footer -->
-					<section id="footer">
-						<div class="container">
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved.</li>
-								<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-								<li>Cover Photo: <a href="https://unsplash.com/@asoggetti?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a></li>
-							</ul>
-						</div>
-					</section>
-
-			</div>
-
-		<!-- Scripts -->
-			<script src="static/assets/js/jquery.min.js"></script>
-			<script src="static/assets/js/jquery.scrollex.min.js"></script>
-			<script src="static/assets/js/jquery.scrolly.min.js"></script>
-			<script src="static/assets/js/browser.min.js"></script>
-			<script src="static/assets/js/breakpoints.min.js"></script>
-			<script src="static/assets/js/util.js"></script>
-			<script src="static/assets/js/main.js"></script>
-			<script src="static/assets/js/custom.js"></script>
-			<script>   
-				{% if error==True%}
-					scrollTo("five");
-				{%endif%};
-   				
-				function scrollTo(hash) {
-    			location.hash = "#" + hash;
-				}
-
-			</script>
-
-	</body>
-</html>
+{% include 'footer.html' %}
