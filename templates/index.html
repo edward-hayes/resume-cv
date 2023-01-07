@@ -349,7 +349,15 @@ with Driver() as driver:
 												</ul>
     											{% endif %}
 											</div>
-											<div class="col-12">
+											<div class="col-8">
+												<ul class="actions">
+													<li>{{ captcha_html(captcha) | safe }}</li>
+													{% if captcha_error %}
+													<span class="errors"><li>Wrong captcha, try again</li></span>
+													{% endif %}
+												</ul>
+											</div>
+											<div class="col-4">
 												<ul class="actions">
 													<li>{{form.submit(class="primary")}}</li>
 												</ul>
