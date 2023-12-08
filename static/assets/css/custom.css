@@ -46,6 +46,8 @@
     font-size: 1.75em;
     margin-top: .25em;
     color: Var(--secondary-color);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 400;
 }
 
 .fa-square {
@@ -94,6 +96,9 @@
 
 header.major h2 {
     color: Var(--secondary-color);
+    font-family: 'Hanken Grotesk', sans-serif;
+    font-weight: 200;
+    letter-spacing: .42rem;
 }
 
 .inner > p {
@@ -229,4 +234,41 @@ input[type="text"]:focus,
 #thanks > div.container > h1 {
     font-family: 'Alex Brush', cursive;
     font-size: 4em;
+}
+
+/* features */
+.features article {
+    border-top: solid 3px #f4f4f4;
+    margin-bottom: 2.25em;
+    padding-top: 2.25em;
+    overflow: hidden; /* Clear float */
+}
+
+.features article:first-child {
+    border-top: 0;
+    padding-top: 0;
+}
+
+.features article .left-column {
+    float: left;
+    width: 48%;
+}
+
+/* .features article .image {
+    display: block;
+    margin-bottom: 1em; /* Adjust as needed */
+/* } */ */
+
+.features article .image img {
+    display: block;
+    width: 100%;
+}
+
+.features article .right-column {
+    float: right;
+    width: 48%;
+}
+
+.features article .inner > :last-child {
+    margin-bottom: 0;
 }
