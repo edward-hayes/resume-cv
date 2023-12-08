@@ -254,10 +254,10 @@ input[type="text"]:focus,
     width: 48%;
 }
 
-/* .features article .image {
+.features article .image {
     display: block;
     margin-bottom: 1em; /* Adjust as needed */
-/* } */ */
+}
 
 .features article .image img {
     display: block;
@@ -272,3 +272,5 @@ input[type="text"]:focus,
 .features article .inner > :last-child {
     margin-bottom: 0;
 }
+
+/* this is an extra line to test heroku build */
