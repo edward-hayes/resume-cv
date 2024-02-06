@@ -196,22 +196,21 @@ def suggest_products():
                 for item in line_items:
                     if "id" in item and item["id"] == EXAMPLE_PRODUCT:
                         return {"actions": []}
-        else:
-            response_payload = {
-                    "actions": [
+        response_payload = {
+                "actions": [
+                    {
+                    "type": "suggest_products",
+                    "title": "Suggested Products",
+                    "message": "Can I offer you an egg in this trying time?",
+                    "suggested_products": [
                         {
-                        "type": "suggest_products",
-                        "title": "Suggested Products",
-                        "message": "Can I offer you an egg in this trying time?",
-                        "suggested_products": [
-                            {
-                            "product_id": EXAMPLE_PRODUCT,
-                            }
-                        ]
-                        }   
+                        "product_id": EXAMPLE_PRODUCT,
+                        }
                     ]
-                    }
-            return response_payload
+                    }   
+                ]
+                }
+        return response_payload
     else:  
         return {"error": "Invalid request"}, 400
 
