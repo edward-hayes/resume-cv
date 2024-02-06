@@ -94,7 +94,8 @@ def receive_and_verify(request):
 @app.route('/lsx-1605/require_custom_fields', methods=['POST'])
 def require_custom_fields():
     if receive_and_verify(request):
-        if len(request.json['custom_fields']) > 0: # if custom fields are already set, don't require them again
+        data = request.json
+        if "custom_fields" in data and len(data['custom_fields']) > 0: # if custom fields are already set, don't require them again
             return {"actions": []}
         else:
             response_payload = {
@@ -186,7 +187,7 @@ def remove_line_item():
 @app.route('/lsx-1605/suggest_products', methods=['POST'])
 def suggest_products():
     if receive_and_verify(request):
-        data = request.json()
+        data = request.json
         if "sale" in data and "line_items" in data["sale"]:
                 line_items = data["sale"]["line_items"]
                 for item in line_items:
