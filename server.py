@@ -188,13 +188,10 @@ def remove_line_item():
 def suggest_products():
     if receive_and_verify(request):
         data = request.json
-        print("we got data")
         if "sale" in data and "line_items" in data["sale"]:
-                print("we got line items")
                 line_items = data["sale"]["line_items"]
-                print("checking line items")
                 for item in line_items:
-                    if "id" in item and item["id"] == EXAMPLE_PRODUCT:
+                    if "product_id" in item and item["product_id"] == EXAMPLE_PRODUCT:
                         return {"actions": []}
         response_payload = {
                 "actions": [
