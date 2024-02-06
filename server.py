@@ -77,112 +77,140 @@ def thanks():
 ########  EXTRA LSX ROUTES  ########
 
 EXAMPLE_PRODUCT = "b76dc8f4-4e5d-40be-8a37-f09507bfb66d" ## testlspayexclusive "egg"
-def receive_and_respond(request, response_payload):
+def receive_and_verify(request):
     try:
         json_data = request.get_json()
 
         if json_data and 'event_type' in json_data:
             print("request received:\n", json.dumps(json_data, indent=2))
-            return response_payload
+            return True
         else:
             print("unknown request received:\n", request.args)
-            return jsonify({"error": "Invalid or workflow request"}), 400
+            return False
     except Exception as e:
         # Handle any exceptions and return an error response
-        error_response = {
-            "error": str(e)
-        }
-        return jsonify(error_response), 500
+        return False
 
 @app.route('/lsx-1605/require_custom_fields', methods=['POST'])
 def require_custom_fields():
-    response_payload = {
-            "actions": [
-                {
-                "type": "require_custom_fields",
-                "title": "Require Custom Fields Example",
-                "message": "Ask them if they like coffee or tea",
-                "entity": "sale",
-                "entity_id": "cc0e2f8f-3c14-ac66-11ea-9e2e4fefb804",
-                "required_custom_fields": [
-                    {
-                    "name": "favorite-drink",
-                    "values": [
+    if receive_and_verify(request):
+        if len(request.json['custom_fields']) > 0: # if custom fields are already set, don't require them again
+            return {"actions": []}
+        else:
+            response_payload = {
+                    "actions": [
                         {
-                        "value": "coffee",
-                        "title": "best part of waking up"
-                        },
-                        {
-                        "value": "tea",
-                        "title": "tea makes everything better"
-                        },
-                        {
-                        "value": "neither",
-                        "title": "explain yourself"
+                        "type": "require_custom_fields",
+                        "title": "Require Custom Fields Example",
+                        "message": "Ask them if they like coffee or tea",
+                        "entity": "sale",
+                        "entity_id": "cc0e2f8f-3c14-ac66-11ea-9e2e4fefb804",
+                        "required_custom_fields": [
+                            {
+                            "name": "favorite-drink",
+                            "values": [
+                                {
+                                "value": "coffee",
+                                "title": "best part of waking up"
+                                },
+                                {
+                                "value": "tea",
+                                "title": "tea makes everything better"
+                                },
+                                {
+                                "value": "neither",
+                                "title": "explain yourself"
+                                }
+                            ]
+                            },
+                            {
+                            "name": "drink-note"
+                            }
+                        ]
                         }
                     ]
-                    },
-                    {
-                    "name": "drink-note"
                     }
-                ]
-                }
-            ]
-            }
-    return receive_and_respond(request, response_payload)
+            return response_payload
+    else:
+        return {"error": "Invalid request"}, 400
 
 @app.route('/lsx-1605/set_custom_field', methods=['POST'])
 def set_custom_field():
-    response_payload = {
-            "actions": [
-                {
-                "type": "set_custom_field",
-                "entity": "sale",
-                "custom_field_name": "customer_changed_at",
-                "custom_field_value": time.time()
+    if receive_and_verify(request):
+        response_payload = {
+                "actions": [
+                    {
+                    "type": "set_custom_field",
+                    "entity": "sale",
+                    "custom_field_name": "customer_changed_at",
+                    "custom_field_value": time.time()
+                    }
+                ]
                 }
-            ]
-            }
-    return receive_and_respond(request, response_payload)
+        return response_payload
+    else:
+        return {"error": "Invalid request"}, 400
 
 @app.route('/lsx-1605/add_line_item', methods=['POST'])
 def add_line_item():
-    response_payload = {
-            "actions": [
-                {
-                "type": "add_line_item",
-                "product_id": EXAMPLE_PRODUCT,
-                "quantity": 1,
-                "note": "here's an egg for this trying time",
+    if receive_and_verify(request):
+        response_payload = {
+                "actions": [
+                    {
+                    "type": "add_line_item",
+                    "product_id": EXAMPLE_PRODUCT,
+                    "quantity": 1,
+                    "note": "here's an egg for this trying time",
+                    }
+                ]
                 }
-            ]
-            }
-    return receive_and_respond(request, response_payload)
+        return response_payload
+    else:
+        return {"error": "Invalid request"}, 400
 
 @app.route('/lsx-1605/remove_line_item', methods=['POST'])
 def remove_line_item():
-    response_payload = {
-        "success": True
-    }
-    return receive_and_respond(request, response_payload)
+    if receive_and_verify(request):
+        response_payload = {
+                "actions": [
+                    {
+                    "type": "remove_line_item",
+                    "line_item_id": "b76dc8f4-4e5d-40be-8a37-f09507bfb66d"
+                    }
+                ]
+                }
+        return response_payload
+    else:
+        return {"error": "Invalid request"}, 400
 
 @app.route('/lsx-1605/suggest_products', methods=['POST'])
 def suggest_products():
-    response_payload = {
-  "actions": [
-    {
-      "type": "suggest_products",
-      "title": "Suggested Products",
-      "message": "Can I offer you an egg in this trying time?",
-      "suggested_products": [
-        {
-          "product_id": EXAMPLE_PRODUCT,
-        }
-      ]
-    }
-  ]
-}
-    return receive_and_respond(request, response_payload)
+    if receive_and_verify(request):
+        data = request.json()
+        if "sale" in data and "line_items" in data["sale"]:
+                line_items = data["sale"]["line_items"]
+                for item in line_items:
+                    if "id" in item and item["id"] == EXAMPLE_PRODUCT:
+                        return {"actions": []}
+        else:
+            response_payload = {
+                    "actions": [
+                        {
+                        "type": "suggest_products",
+                        "title": "Suggested Products",
+                        "message": "Can I offer you an egg in this trying time?",
+                        "suggested_products": [
+                            {
+                            "product_id": EXAMPLE_PRODUCT,
+                            }
+                        ]
+                        }   
+                    ]
+                    }
+            return response_payload
+    else:  
+        return {"error": "Invalid request"}, 400
+
 
 ########  EXTRA LSX ROUTES  ########
 
