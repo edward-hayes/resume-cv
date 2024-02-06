@@ -78,20 +78,22 @@ def thanks():
 
 EXAMPLE_PRODUCT = "b76dc8f4-4e5d-40be-8a37-f09507bfb66d" ## testlspayexclusive "egg"
 def receive_and_respond(request, response_payload):
-    if 'event_type' in request.args:
-        try:
-            json_data = request.get_json()
+    try:
+        json_data = request.get_json()
+
+        if json_data and 'event_type' in json_data:
             print("request received:\n", json.dumps(json_data, indent=2))
             return jsonify(response_payload)
-        except Exception as e:
-            # Handle any exceptions and return an error response
-            error_response = {
-                "error": str(e)
-            }
-            return jsonify(error_response), 500
-    else:
-        print("unknown request received:\n", request.args)
-        return
+        
+        else:
+            print("unknown request received:\n", request.args)
+            return jsonify({"error": "Invalid or workflow request"}), 400
+    except Exception as e:
+        # Handle any exceptions and return an error response
+        error_response = {
+            "error": str(e)
+        }
+        return jsonify(error_response), 500
 
 @app.route('/lsx-1605/require_custom_fields', methods=['POST'])
 def require_custom_fields():
