@@ -95,7 +95,7 @@ def receive_and_verify(request):
 def require_custom_fields():
     if receive_and_verify(request):
         data = request.json
-        if "custom_fields" in data and len(data['custom_fields']) > 0: # if custom fields are already set, don't require them again
+        if "sale" in data and "custom_fields" in data["sale"] and len(data["sale"]['custom_fields']) > 0: # if custom fields are already set, don't require them again
             return {"actions": []}
         else:
             response_payload = {
@@ -112,15 +112,15 @@ def require_custom_fields():
                             "values": [
                                 {
                                 "value": "coffee",
-                                "title": "best part of waking up"
+                                "title": "Cofee - best part of waking up"
                                 },
                                 {
                                 "value": "tea",
-                                "title": "tea makes everything better"
+                                "title": "tea - tea makes everything better"
                                 },
                                 {
                                 "value": "neither",
-                                "title": "explain yourself"
+                                "title": "neither - explain yourself"
                                 }
                             ]
                             },
