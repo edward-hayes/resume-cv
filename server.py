@@ -102,7 +102,7 @@ def require_custom_fields():
                 "type": "require_custom_fields",
                 "title": "Require Custom Fields Example",
                 "message": "Ask them if they like coffee or tea",
-                "entity": "line_item",
+                "entity": "sale",
                 "entity_id": "cc0e2f8f-3c14-ac66-11ea-9e2e4fefb804",
                 "required_custom_fields": [
                     {
