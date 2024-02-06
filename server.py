@@ -1,4 +1,6 @@
-from flask import Flask
+import json
+import time
+from flask import Flask, jsonify
 from flask import render_template, redirect, url_for, request
 from flask_simple_captcha import CAPTCHA
 from mailer import Email as Mail
@@ -71,6 +73,113 @@ def home():
 def thanks():
     name = request.args.get('name')
     return render_template('success.html',name=name, year=year)
+
+########  EXTRA LSX ROUTES  ########
+
+EXAMPLE_PRODUCT = "b76dc8f4-4e5d-40be-8a37-f09507bfb66d" ## testlspayexclusive "egg"
+def receive_and_respond(request, response_payload):
+    try: 
+        json_data = request.get_json()
+        print("request received:\n", json.dumps(json_data, indent=2))
+        return jsonify(response_payload)
+    except Exception as e:
+        # Handle any exceptions and return an error response
+        error_response = {
+            "error": str(e)
+        }
+        return jsonify(error_response), 500
+
+@app.route('/lsx-1605/require_custom_fields', methods=['POST'])
+def require_custom_fields():
+    response_payload = {
+            "actions": [
+                {
+                "type": "require_custom_fields",
+                "title": "Require Custom Fields Example",
+                "message": "Ask them if they like coffee or tea",
+                "entity": "line_item",
+                "entity_id": "cc0e2f8f-3c14-ac66-11ea-9e2e4fefb804",
+                "required_custom_fields": [
+                    {
+                    "name": "favorite-drink",
+                    "values": [
+                        {
+                        "value": "coffee",
+                        "title": "best part of waking up"
+                        },
+                        {
+                        "value": "tea",
+                        "title": "tea makes everything better"
+                        },
+                        {
+                        "value": "neither",
+                        "title": "explain yourself"
+                        }
+                    ]
+                    },
+                    {
+                    "name": "drink-note"
+                    }
+                ]
+                }
+            ]
+            }
+    return receive_and_respond(request, response_payload)
+
+@app.route('/lsx-1605/set_custom_field', methods=['POST'])
+def set_custom_field():
+    response_payload = {
+            "actions": [
+                {
+                "type": "set_custom_field",
+                "entity": "sale",
+                "custom_field_name": "customer_changed_at",
+                "custom_field_value": time.time()
+                }
+            ]
+            }
+    return receive_and_respond(request, response_payload)
+
+@app.route('/lsx-1605/add_line_item', methods=['POST'])
+def add_line_item():
+    response_payload = {
+            "actions": [
+                {
+                "type": "add_line_item",
+                "product_id": EXAMPLE_PRODUCT,
+                "quantity": 1,
+                "note": "here's an egg for this trying time",
+                }
+            ]
+            }
+    return receive_and_respond(request, response_payload)
+
+@app.route('/lsx-1605/remove_line_item', methods=['POST'])
+def remove_line_item():
+    response_payload = {
+        "success": True
+    }
+    return receive_and_respond(request, response_payload)
+
+@app.route('/lsx-1605/suggest_products', methods=['POST'])
+def suggest_products():
+    response_payload = {
+  "actions": [
+    {
+      "type": "suggest_products",
+      "title": "Suggested Products",
+      "message": "Can I offer you an egg in this trying time?",
+      "suggested_products": [
+        {
+          "product_id": EXAMPLE_PRODUCT,
+        }
+      ]
+    }
+  ]
+}
+    return receive_and_respond(request, response_payload)
+
+########  EXTRA LSX ROUTES  ########
 
 if __name__ == "__main__":
     app.run()
