@@ -83,8 +83,7 @@ def receive_and_respond(request, response_payload):
 
         if json_data and 'event_type' in json_data:
             print("request received:\n", json.dumps(json_data, indent=2))
-            return jsonify(response_payload)
-        
+            return response_payload
         else:
             print("unknown request received:\n", request.args)
             return jsonify({"error": "Invalid or workflow request"}), 400
