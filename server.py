@@ -213,6 +213,15 @@ def suggest_products():
 
 
 ########  EXTRA LSX ROUTES  ########
+########  REGISTER LOG RECEIVER ########
+@app.route('/register_log', methods=['POST'])
+def register_log():
+    try:
+        json_data = request.get_json()
+        print("request received:\n", json.dumps(json_data, indent=2))
+        return
+    except Exception as e:
+        return
 
 if __name__ == "__main__":
     app.run()
