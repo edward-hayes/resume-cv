@@ -91,7 +91,7 @@ def receive_and_verify(request):
         # Handle any exceptions and return an error response
         return False
 
-@app.route('/lsx-1605/require_custom_fields', methods=['POST'])
+@app.route('/lsx-1605/require_custom_fields_sale', methods=['POST'])
 def require_custom_fields():
     if receive_and_verify(request):
         data = request.json
@@ -134,8 +134,49 @@ def require_custom_fields():
             return response_payload
     else:
         return {"error": "Invalid request"}, 400
+    
+@app.route('/lsx-1605/require_custom_fields_customer', methods=['POST'])
+def require_custom_fields():
+    if receive_and_verify(request):
+        data = request.json
+        if "sale" in data and "custom_fields" in data["sale"] and len(data["sale"]['custom_fields']) > 0: # if custom fields are already set, don't require them again
+            return {"actions": []}
+        else:
+            response_payload = {
+                    "actions": [
+                        {
+                        "type": "require_custom_fields",
+                        "title": "Require Custom Fields Example",
+                        "message": "What is your favorite kind of pet?",
+                        "entity": "customer",
+                        "entity_id": "cc0e2f8f-3c14-ac66-11ea-9e2e4fefb804",
+                        "required_custom_fields": [
+                            {
+                            "name": "favorite-pet",
+                            "values": [
+                                {
+                                "value": "cat",
+                                "title": "Cat - cats are the best"
+                                },
+                                {
+                                "value": "cats",
+                                "title": "Cats - why stop at just one"
+                                },
+                                {
+                                "value": "none",
+                                "title": "None - I don't like pets"
+                                }
+                            ]
+                            }
+                        ]
+                        }
+                    ]
+                    }
+            return response_payload
+    else:
+        return {"error": "Invalid request"}, 400
 
-@app.route('/lsx-1605/set_custom_field', methods=['POST'])
+@app.route('/lsx-1605/set_custom_field_sale', methods=['POST'])
 def set_custom_field():
     if receive_and_verify(request):
         response_payload = {
@@ -143,6 +184,23 @@ def set_custom_field():
                     {
                     "type": "set_custom_field",
                     "entity": "sale",
+                    "custom_field_name": "customer_changed_at",
+                    "custom_field_value": time.time()
+                    }
+                ]
+                }
+        return response_payload
+    else:
+        return {"error": "Invalid request"}, 400
+    
+@app.route('/lsx-1605/set_custom_field_customer', methods=['POST'])
+def set_custom_field():
+    if receive_and_verify(request):
+        response_payload = {
+                "actions": [
+                    {
+                    "type": "set_custom_field",
+                    "entity": "customer",
                     "custom_field_name": "customer_changed_at",
                     "custom_field_value": time.time()
                     }
@@ -213,15 +271,6 @@ def suggest_products():
 
 
 ########  EXTRA LSX ROUTES  ########
-########  REGISTER LOG RECEIVER ########
-@app.route('/register_log', methods=['POST'])
-def register_log():
-    try:
-        json_data = request.get_json()
-        print("request received:\n", json.dumps(json_data, indent=2))
-        return
-    except Exception as e:
-        return
 
 if __name__ == "__main__":
     app.run()
