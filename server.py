@@ -92,7 +92,7 @@ def receive_and_verify(request):
         return False
 
 @app.route('/lsx-1605/require_custom_fields_sale', methods=['POST'])
-def require_custom_fields():
+def require_custom_fields_sale():
     if receive_and_verify(request):
         data = request.json
         if "sale" in data and "custom_fields" in data["sale"] and len(data["sale"]['custom_fields']) > 0: # if custom fields are already set, don't require them again
@@ -136,7 +136,7 @@ def require_custom_fields():
         return {"error": "Invalid request"}, 400
     
 @app.route('/lsx-1605/require_custom_fields_customer', methods=['POST'])
-def require_custom_fields():
+def require_custom_fields_customer():
     if receive_and_verify(request):
         data = request.json
         if "sale" in data and "custom_fields" in data["sale"] and len(data["sale"]['custom_fields']) > 0: # if custom fields are already set, don't require them again
@@ -177,7 +177,7 @@ def require_custom_fields():
         return {"error": "Invalid request"}, 400
 
 @app.route('/lsx-1605/set_custom_field_sale', methods=['POST'])
-def set_custom_field():
+def set_custom_field_sale():
     if receive_and_verify(request):
         response_payload = {
                 "actions": [
@@ -194,7 +194,7 @@ def set_custom_field():
         return {"error": "Invalid request"}, 400
     
 @app.route('/lsx-1605/set_custom_field_customer', methods=['POST'])
-def set_custom_field():
+def set_custom_field_customer():
     if receive_and_verify(request):
         response_payload = {
                 "actions": [
