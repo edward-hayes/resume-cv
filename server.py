@@ -103,29 +103,26 @@ def require_custom_fields_sale():
                         {
                         "type": "require_custom_fields",
                         "title": "Require Custom Fields Example",
-                        "message": "Ask them if they like coffee or tea",
+                        "message": "Which raffle would they like to enter today's purchase?",
                         "entity": "sale",
                         "entity_id": "cc0e2f8f-3c14-ac66-11ea-9e2e4fefb804",
                         "required_custom_fields": [
                             {
-                            "name": "favorite-drink",
+                            "name": "raffle-entry",
                             "values": [
                                 {
-                                "value": "coffee",
-                                "title": "Cofee - best part of waking up"
+                                "value": "free-album",
+                                "title": "A free album - who doesn't love free music"
                                 },
                                 {
-                                "value": "tea",
-                                "title": "tea - tea makes everything better"
+                                "value": "exclusive-merch",
+                                "title": "Exclusive merch - a one of a kind item"
                                 },
                                 {
-                                "value": "neither",
-                                "title": "neither - explain yourself"
+                                "value": "opt-out",
+                                "title": "neither - opt out of the raffle"
                                 }
                             ]
-                            },
-                            {
-                            "name": "drink-note"
                             }
                         ]
                         }
